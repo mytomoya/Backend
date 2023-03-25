@@ -41,16 +41,6 @@ class Controller {
 
     @PostConstruct
     fun init() {
-        var count = 0
-        val timer = Timer()
-        val task = object : TimerTask() {
-            override fun run() {
-                count += 1
-                sendMessage(count)
-            }
-        }
-        timer.scheduleAtFixedRate(task, 0, 2000)
-
         createMqttSubscriber("localhost", "topic")
     }
 }
