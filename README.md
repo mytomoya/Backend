@@ -1,6 +1,15 @@
 # Backend
 
-### WebSocket
+## Installation
+
+### MQTT
+
+```bash
+sudo apt install mosquitto
+sudo apt install mosquitto-clients
+```
+
+## WebSocket
 
 - WebSocket endpoint: `http://localhost:8080/endpoint`
   - `http://localhost:3000` (e.g., React client) can connect to it.
@@ -8,7 +17,7 @@
 - The server listens at `/app/send/message`.
   - If a message is received, the server responds is sent to the topic `/topic/message`.
 
-### MQTT
+## MQTT
 
 Before the server starts, run the following command to launch the MQTT broker:
 
