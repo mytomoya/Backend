@@ -29,10 +29,7 @@ class Subscriber(brokerHostName: String, subscribeTopic: String): MqttCallback {
         TODO("Not yet implemented")
     }
 
-    fun subscribe() {
-        val qos = 2
-        val clientId = "Subscriber"
-
+    fun subscribe(qos: Int = 2, clientId: String = "Subscriber") {
         val client = MqttClient(broker, clientId, MemoryPersistence())
         client.setCallback(this)
         val connectOptions = MqttConnectOptions()
