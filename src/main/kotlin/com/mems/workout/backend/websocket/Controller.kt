@@ -32,7 +32,7 @@ class Controller {
         this.template.convertAndSend("/topic/message", message)
     }
 
-    fun createSubscriber(brokerHostName: String, subscribeTopic: String) {
+    fun createMqttSubscriber(brokerHostName: String, subscribeTopic: String) {
         executor.submit {
             val subscriber = Subscriber(brokerHostName, subscribeTopic, template)
             subscriber.subscribe()
@@ -51,7 +51,7 @@ class Controller {
         }
         timer.scheduleAtFixedRate(task, 0, 2000)
 
-        createSubscriber("localhost", "topic")
+        createMqttSubscriber("localhost", "topic")
     }
 }
 
