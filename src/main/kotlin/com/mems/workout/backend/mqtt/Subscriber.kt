@@ -1,13 +1,19 @@
 package com.mems.workout.backend.mqtt
 
+import com.mems.workout.backend.model.Message
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
+import org.springframework.messaging.simp.SimpMessagingTemplate
 import java.io.BufferedReader
 import java.io.IOException
 import java.io.InputStreamReader
 import kotlin.system.exitProcess
 
-class Subscriber(brokerHostName: String, subscribeTopic: String): MqttCallback {
+class Subscriber(
+    brokerHostName: String,
+    subscribeTopic: String,
+    private val template: SimpMessagingTemplate,
+) : MqttCallback {
     private val broker: String
     private val topic: String
 
@@ -23,6 +29,7 @@ class Subscriber(brokerHostName: String, subscribeTopic: String): MqttCallback {
 
     override fun messageArrived(topic: String, message: MqttMessage) {
         println("received: $message")
+        template.convertAndSend("/topic/message", Message(message.toString()))
     }
 
     override fun deliveryComplete(p0: IMqttDeliveryToken?) {
