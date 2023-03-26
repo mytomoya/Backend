@@ -1,6 +1,7 @@
 package com.mems.workout.backend.mqtt
 
 import com.mems.workout.backend.model.Message
+import com.mems.workout.backend.model.Value
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -30,6 +31,11 @@ class Subscriber(
     override fun messageArrived(topic: String, message: MqttMessage) {
         println("received: $message")
         template.convertAndSend("/topic/message", Message(message.toString()))
+
+        val value = message.toString().toDoubleOrNull()
+        if (value != null) {
+            template.convertAndSend("/topic/value", Value(value))
+        }
     }
 
     override fun deliveryComplete(p0: IMqttDeliveryToken?) {
