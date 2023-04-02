@@ -1,5 +1,17 @@
 # Backend
 
+## Docker
+
+Follow [Install Docker Engine](https://docs.docker.com/engine/install/) to install `Docker Desktop`.
+
+To run the app, run:
+
+```bash
+docker-compose up -d
+docker-compose exec server mvn spring-boot:run
+```
+
+
 ## Installation
 
 ### MQTT
