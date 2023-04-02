@@ -1,6 +1,40 @@
 # Backend
 
-## Docker
+
+## Install MQTT
+
+```bash
+sudo apt install mosquitto
+sudo apt install mosquitto-clients
+```
+
+
+## MQTT Broker
+
+Before the server starts, run the following command to launch the MQTT broker:
+
+```bash
+mosquitto
+```
+
+### Example
+
+To publish messages from the command line, run the following command when the server is running:
+
+```bash
+mosquitto_pub -h localhost -t "mqttTopic" -m "hello, this is an example message"
+```
+
+In the above example, `mqttTopic` is the topic.
+
+You can check the message is successfully received in the server log, e.g.,
+
+```bash
+received: hello, this is an example message.
+```
+
+
+## Run the App
 
 Follow [Install Docker Engine](https://docs.docker.com/engine/install/) to install `Docker Desktop`.
 
@@ -18,15 +52,6 @@ docker network create mems-network --subnet=192.168.1.0/24 --gateway=192.168.1.1
 ```
 
 
-## Installation
-
-### MQTT
-
-```bash
-sudo apt install mosquitto
-sudo apt install mosquitto-clients
-```
-
 ## WebSocket
 
 - WebSocket endpoint: `http://localhost:8080/endpoint`
@@ -34,25 +59,3 @@ sudo apt install mosquitto-clients
 - For debug purposes, the server sends a message to the topic `/topic/message` every 2 seconds.
 - The server listens at `/app/send/message`.
   - If a message is received, the server responds is sent to the topic `/topic/message`.
-
-## MQTT
-
-Before the server starts, run the following command to launch the MQTT broker:
-
-```bash
-mosquitto
-```
-
-To publish messages from the command line, run the following command when the server is running:
-
-```bash
-mosquitto_pub -h localhost -t "mqttTopic" -m "hello, this is an example message"
-```
-
-In the above example, `mqttTopic` is the topic.
-
-You can check the message is successfully received in the server log, e.g.,
-
-```bash
-received: hello, this is an example message.
-```
