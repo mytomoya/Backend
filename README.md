@@ -11,6 +11,12 @@ docker-compose up -d
 docker-compose exec server mvn spring-boot:run
 ```
 
+If you get the `network mems-network declared as external, but could not be found` error, run:
+
+```bash
+docker network create mems-network --subnet=192.168.1.0/24 --gateway=192.168.1.1
+```
+
 
 ## Installation
 
