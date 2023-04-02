@@ -41,7 +41,7 @@ class Controller {
 
     @PostConstruct
     fun init() {
-        createMqttSubscriber("localhost", "topic")
+        createMqttSubscriber("host.docker.internal", "topic")
     }
 }
 
