@@ -14,7 +14,7 @@ sudo apt install mosquitto-clients
 Before the server starts, run the following command to launch the MQTT broker:
 
 ```bash
-mosquitto
+mosquitto -c mosquitto.conf
 ```
 
 ### Example
