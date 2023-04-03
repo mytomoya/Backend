@@ -41,8 +41,7 @@ Follow [Install Docker Engine](https://docs.docker.com/engine/install/) to insta
 To run the app, run:
 
 ```bash
-docker-compose up -d
-docker-compose exec server mvn spring-boot:run
+docker-compose up
 ```
 
 If you get the `network mems-network declared as external, but could not be found` error, run:
