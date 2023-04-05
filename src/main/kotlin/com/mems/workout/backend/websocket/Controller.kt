@@ -1,6 +1,6 @@
 package com.mems.workout.backend.websocket
 
-import com.fasterxml.jackson.databind.ObjectMapper
+import com.fasterxml.jackson.databind.JsonNode
 import com.mems.workout.backend.db.Data
 import com.mems.workout.backend.db.UseCase
 import com.mems.workout.backend.model.Message
@@ -10,7 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.messaging.simp.SimpMessagingTemplate
-import org.springframework.web.bind.annotation.GetMapping
+import org.springframework.web.bind.annotation.PostMapping
+import org.springframework.web.bind.annotation.RequestBody
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -45,20 +46,18 @@ class Controller {
         }
     }
 
-    @GetMapping("/add")
-    fun add() {
-        val mapper = ObjectMapper()
+    @PostMapping("/add")
+    fun add(@RequestBody dataJson: JsonNode) {
 
-        val id = 0
+        val id = 0 // this value is not important
         val datetime = Date()
-        val dataJson = mapper.readTree("{\"time\":[0,1,2],\"value\":[3,4,5]}")
-        val data = Data(0, datetime, dataJson)
+        val data = Data(id, datetime, dataJson)
 
         val result = useCase.add(data)
         if (result) {
-            println("[Success] registered $dataJson")
+            println("[Success] added $dataJson")
         } else {
-            println("[Error] registering $dataJson failed")
+            println("[Error] adding $dataJson failed")
         }
     }
 
