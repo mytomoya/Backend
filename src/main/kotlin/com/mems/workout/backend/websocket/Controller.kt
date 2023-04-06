@@ -86,7 +86,7 @@ class Controller {
     }
 
     @ExceptionHandler(InvalidIdException::class)
-    fun handleInvalidIdException(exception: InvalidIdException): ResponseEntity<Map<String, Any>> {
+    fun handleInvalidIdException(exception: InvalidIdException): ResponseEntity<Map<String, String>> {
         val error = exception.message ?: ""
         return ResponseEntity.status(HttpStatus.BAD_REQUEST)
             .body(
