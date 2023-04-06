@@ -36,4 +36,12 @@ class Data(id: Int, datetime: Date, dataJson: JsonNode) {
     fun setDataJson(dataJson: JsonNode) {
         this.dataJson = dataJson
     }
+
+    override fun toString(): String {
+        return "(\n" +
+                "\tid: $id, \n" +
+                "\tdatetime: $datetime, \n" +
+                "\tdataJson: $dataJson \n" +
+                ")"
+    }
 }
