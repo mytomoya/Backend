@@ -26,21 +26,28 @@ class Repository : Domain {
     }
 
     override fun get(id: Int): Data? {
-        val map = jdbc.queryForMap(
-            "SELECT * FROM log" +
-                    " WHERE id = ?",
-            id
-        )
+        try {
+            // When 0 records match,
+            // it throws `EmptyResultDataAccessException`
+            val map = jdbc.queryForMap(
+                "SELECT * FROM log" +
+                        " WHERE id = ?",
+                id
+            )
 
-        val date = convertToDate(map["datetime"].toString())
-        val objectMapper = ObjectMapper()
-        val dataJson = objectMapper.readTree(map["data_json"].toString())
+            val date = convertToDate(map["datetime"].toString())
+            val objectMapper = ObjectMapper()
+            val dataJson = objectMapper.readTree(map["data_json"].toString())
 
-        if (date == null || dataJson == null) {
+            if (date == null || dataJson == null) {
+                return null
+            }
+
+            return Data(id, date, dataJson)
+        } catch (exception: Exception) {
+            println("[Exception] $exception")
             return null
         }
-
-        return Data(id, date, dataJson)
     }
 
     fun convertToDate(dateString: String): Date? {
