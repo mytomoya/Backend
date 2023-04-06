@@ -18,6 +18,10 @@ class UseCase {
         return numUpdated > 0
     }
 
+    fun get(id: Int): Data? {
+        return domain.get(id)
+    }
+
     private fun validate(data: Data): Boolean {
         val time = data.getDataJson().get("time")
         val values = data.getDataJson().get("values")

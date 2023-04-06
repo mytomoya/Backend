@@ -10,8 +10,10 @@ import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.messaging.handler.annotation.MessageMapping
 import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.messaging.simp.SimpMessagingTemplate
+import org.springframework.web.bind.annotation.GetMapping
 import org.springframework.web.bind.annotation.PostMapping
 import org.springframework.web.bind.annotation.RequestBody
+import org.springframework.web.bind.annotation.RequestParam
 import org.springframework.web.bind.annotation.RestController
 import java.util.*
 import java.util.concurrent.ExecutorService
@@ -58,6 +60,17 @@ class Controller {
             println("[Success] added $dataJson")
         } else {
             println("[Error] adding $dataJson failed")
+        }
+    }
+
+    @GetMapping("/get")
+    fun get(@RequestParam("id") id: Int) {
+
+        val data = useCase.get(id)
+        if (data != null) {
+            println("[Success] got: \n$data")
+        } else {
+            println("[Error] getting $id failed")
         }
     }
 
