@@ -8,4 +8,7 @@ interface Domain {
 
     @Throws(DataAccessException::class, ClassCastException::class)
     fun get(id: Int): Data?
+
+    @Throws(DataAccessException::class, ClassCastException::class)
+    fun delete(id: Int): Int
 }

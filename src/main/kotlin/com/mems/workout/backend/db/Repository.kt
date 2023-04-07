@@ -58,4 +58,10 @@ class Repository : Domain {
         return Date.from(instant)
     }
 
+    override fun delete(id: Int): Int {
+        return jdbc.update(
+            "DELETE FROM log WHERE id = ?",
+            id,
+        )
+    }
 }
