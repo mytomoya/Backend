@@ -22,6 +22,11 @@ class UseCase {
         return domain.get(id)
     }
 
+    fun delete(id: Int): Boolean {
+        val numDeleted = domain.delete(id)
+        return numDeleted > 0
+    }
+
     private fun validate(data: Data): Boolean {
         val time = data.getDataJson().get("time")
         val values = data.getDataJson().get("values")
