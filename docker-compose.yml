@@ -19,6 +19,28 @@ services:
       - "host.docker.internal:host-gateway"
     command: 
       mvn spring-boot:run
+  db:
+    container_name: mems-db
+    build:
+      context: .
+      dockerfile: ./db/Dockerfile
+    volumes:
+      - type: volume
+        source: mems-db-volume
+        target: /var/lib/mysql
+      - type: bind
+        source: ./db/init.sql
+        target: /docker-entrypoint-initdb.d/init.sql
+    networks:
+      mems-network:
+        ipv4_address: 192.168.1.4
+    environment:
+      MYSQL_ROOT_PASSWORD: rootpassword
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      MYSQL_DATABASE: deadlift
 networks:
   mems-network:
     external: true
+volumes:
+  mems-db-volume:
