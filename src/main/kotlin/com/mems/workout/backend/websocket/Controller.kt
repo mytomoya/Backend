@@ -79,6 +79,24 @@ class Controller {
         }
     }
 
+    @GetMapping("/delete")
+    fun delete(@RequestParam("id") id: Int): ResponseEntity<Map<String, Any>> {
+
+        val result = useCase.delete(id)
+        return if (result) {
+            println("[Success] delete: \n$id")
+            ResponseEntity.ok(
+                mapOf(
+                    "data" to id,
+                    "error" to "",
+                )
+            )
+        } else {
+            println("[Error] deleting $id failed")
+            throw InvalidIdException("Invalid ID: $id")
+        }
+    }
+
     @ExceptionHandler(InvalidIdException::class)
     fun handleInvalidIdException(exception: InvalidIdException): ResponseEntity<Map<String, String>> {
         val error = exception.message ?: ""
@@ -92,8 +110,8 @@ class Controller {
 
     @PostConstruct
     fun init() {
-        createMqttSubscriber("host.docker.internal", "topic")
-//        createMqttSubscriber("localhost", "topic")
+//        createMqttSubscriber("host.docker.internal", "topic")
+        createMqttSubscriber("localhost", "topic")
     }
 }
 
