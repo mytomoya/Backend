@@ -48,7 +48,7 @@ class Controller {
     }
 
     @PostMapping("/add")
-    fun add(@RequestBody dataJson: JsonNode): ResponseEntity<Map<String, Any>> {
+    fun add(@RequestBody dataJson: JsonNode) {
 
         val id = 0 // this value is not important
         val datetime = Date()
@@ -57,15 +57,8 @@ class Controller {
         val result = useCase.add(data)
         if (result) {
             println("[Success] added $dataJson")
-            return ResponseEntity.ok(
-                mapOf(
-                    "data" to data,
-                    "error" to "",
-                )
-            )
         } else {
             println("[Error] adding $dataJson failed")
-            throw InvalidIdException("Failed to add $data")
         }
     }
 
