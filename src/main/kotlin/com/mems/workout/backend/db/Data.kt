@@ -13,6 +13,7 @@ class Data(id: Int, datetime: Date, dataJson: JsonNode) {
         this.datetime = datetime
         this.dataJson = dataJson
     }
+
     fun getId(): Int {
         return this.id
     }

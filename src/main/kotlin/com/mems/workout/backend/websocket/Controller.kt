@@ -72,7 +72,8 @@ class Controller {
                 mapOf(
                     "data" to data,
                     "error" to "",
-                ))
+                )
+            )
         } else {
             println("[Error] getting $id failed")
             throw InvalidIdException("Invalid ID: $id")
@@ -105,7 +106,8 @@ class Controller {
                 mapOf(
                     "data" to "",
                     "error" to error,
-                ))
+                )
+            )
     }
 
     @PostConstruct
