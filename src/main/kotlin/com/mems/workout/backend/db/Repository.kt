@@ -24,7 +24,7 @@ class Repository : Domain {
     }
 
     override fun get(id: Int): Data? {
-        try {
+        return try {
             // When 0 records match,
             // it throws `EmptyResultDataAccessException`
             val map = jdbc.queryForMap(
@@ -33,18 +33,10 @@ class Repository : Domain {
                 id
             )
 
-            val date = convertToDate(map["datetime"].toString())
-            val objectMapper = ObjectMapper()
-            val dataJson = objectMapper.readTree(map["data_json"].toString())
-
-            if (date == null || dataJson == null) {
-                return null
-            }
-
-            return Data(id, date, dataJson)
+            validateRecord(map)
         } catch (exception: Exception) {
             println("[Exception] $exception")
-            return null
+            null
         }
     }
 
@@ -64,4 +56,17 @@ class Repository : Domain {
             id,
         )
     }
+
+    fun validateRecord(record: Map<String, Any>): Data? {
+        val id = record["id"].toString().toIntOrNull()
+        val date = convertToDate(record["datetime"].toString())
+        val objectMapper = ObjectMapper()
+        val dataJson = objectMapper.readTree(record["data_json"].toString())
+
+        if (id == null || date == null || dataJson == null) {
+            return null
+        }
+        return Data(id, date, dataJson)
+    }
+
 }
