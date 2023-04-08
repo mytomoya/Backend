@@ -27,6 +27,10 @@ class UseCase {
         return numDeleted > 0
     }
 
+    fun getRecords(offset: Int): List<Data>? {
+        return domain.getRecords(offset)
+    }
+
     private fun validate(data: Data): Boolean {
         val time = data.getDataJson().get("time")
         val values = data.getDataJson().get("values")

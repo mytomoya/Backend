@@ -106,6 +106,24 @@ class Controller {
         }
     }
 
+    @GetMapping("/list")
+    fun getRecords(@RequestParam("offset") offset: Int): ResponseEntity<Map<String, Any>> {
+
+        val data = useCase.getRecords(offset)
+        return if (data != null) {
+            println("[Success] got: \n$data")
+            ResponseEntity.ok(
+                mapOf(
+                    "data" to data,
+                    "error" to "",
+                )
+            )
+        } else {
+            println("[Error] getting list with $offset failed")
+            throw InvalidIdException("Invalid offset: $offset")
+        }
+    }
+
     @ExceptionHandler(InvalidIdException::class)
     fun handleInvalidIdException(exception: InvalidIdException): ResponseEntity<Map<String, String>> {
         val error = exception.message ?: ""

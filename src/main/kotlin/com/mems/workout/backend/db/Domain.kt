@@ -11,4 +11,7 @@ interface Domain {
 
     @Throws(DataAccessException::class, ClassCastException::class)
     fun delete(id: Int): Int
+
+    @Throws(DataAccessException::class, ClassCastException::class)
+    fun getRecords(offset: Int): List<Data>?
 }
