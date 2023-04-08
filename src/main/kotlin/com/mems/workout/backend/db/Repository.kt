@@ -63,7 +63,7 @@ class Repository : Domain {
             // it throws `EmptyResultDataAccessException`
             val list = jdbc.queryForList(
                 "SELECT * FROM log" +
-                        " ORDER BY datetime LIMIT 10 OFFSET ?",
+                        " ORDER BY datetime DESC LIMIT 10 OFFSET ?",
                 offset
             )
 
