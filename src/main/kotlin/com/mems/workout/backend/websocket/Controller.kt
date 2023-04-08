@@ -19,6 +19,7 @@ import java.util.concurrent.ExecutorService
 import java.util.concurrent.Executors
 
 @RestController
+@CrossOrigin(origins = ["http://localhost:3000"])
 class Controller {
     @Autowired
     lateinit var template: SimpMessagingTemplate
@@ -119,8 +120,8 @@ class Controller {
 
     @PostConstruct
     fun init() {
-//        createMqttSubscriber("host.docker.internal", "topic")
-        createMqttSubscriber("localhost", "topic")
+        createMqttSubscriber("host.docker.internal", "topic")
+//        createMqttSubscriber("localhost", "topic")
     }
 }
 
