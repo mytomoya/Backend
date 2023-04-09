@@ -22,15 +22,21 @@ mosquitto -c mosquitto.conf
 To publish messages from the command line, run the following command when the server is running:
 
 ```bash
-mosquitto_pub -h localhost -t "mqttTopic" -m "hello, this is an example message"
+mosquitto_pub -h localhost -t "topic" -m "1234"
 ```
 
-In the above example, `mqttTopic` is the topic.
+In the above example, `topic` is the topic.
 
 You can check the message is successfully received in the server log, e.g.,
 
 ```bash
-received: hello, this is an example message.
+received: 1234
+```
+
+You can also send random data continuously to simulate the real use case by running the command:
+
+```bash
+i=1; while true; do mosquitto_pub -h localhost -t "topic" -m "$RANDOM"; i=$((i+1)); sleep 1; done
 ```
 
 
