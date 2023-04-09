@@ -28,12 +28,6 @@ class Controller {
     @Autowired
     private lateinit var useCase: UseCase
 
-    fun sendMessage(number: Int) {
-        val message = Message("example message $number")
-        println(message.getContent())
-        this.template.convertAndSend("/topic/message", message)
-    }
-
     fun createMqttSubscriber(brokerHostName: String, subscribeTopic: String) {
         executor.submit {
             val subscriber = Subscriber(brokerHostName, subscribeTopic, template)
