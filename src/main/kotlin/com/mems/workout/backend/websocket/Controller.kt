@@ -28,13 +28,6 @@ class Controller {
     @Autowired
     private lateinit var useCase: UseCase
 
-    @MessageMapping("/send/message")
-    @SendTo("/topic/message")
-    fun handleMessage(message: Message): Message {
-        println(message.getContent())
-        return Message("server received: ${message.getContent()}")
-    }
-
     fun sendMessage(number: Int) {
         val message = Message("example message $number")
         println(message.getContent())
