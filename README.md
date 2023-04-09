@@ -33,6 +33,12 @@ You can check the message is successfully received in the server log, e.g.,
 received: 1234
 ```
 
+You can also send random data continuously to simulate the real use case by running the command:
+
+```bash
+i=1; while true; do mosquitto_pub -h localhost -t "topic" -m "$RANDOM"; i=$((i+1)); sleep 1; done
+```
+
 
 ## Run the App
 
