@@ -30,7 +30,7 @@ In the above example, `topic` is the topic.
 You can check the message is successfully received in the server log, e.g.,
 
 ```bash
-received: hello, this is an example message.
+received: 1234
 ```
 
 
