@@ -4,22 +4,22 @@ import com.fasterxml.jackson.annotation.JsonCreator
 import com.fasterxml.jackson.annotation.JsonProperty
 
 class Data @JsonCreator constructor(
-    @JsonProperty("y") private var y: Array<Float>,
-    @JsonProperty("z") private var z: Array<Float>,
+    @JsonProperty("y") private var y: Float,
+    @JsonProperty("z") private var z: Float,
 ) {
-    fun getZ(): Array<Float> {
+    fun getZ(): Float {
         return this.z
     }
 
-    fun setZ(z: Array<Float>) {
+    fun setZ(z: Float) {
         this.z = z
     }
 
-    fun getY(): Array<Float> {
+    fun getY(): Float {
         return this.y
     }
 
-    fun setY(y: Array<Float>) {
+    fun setY(y: Float) {
         this.y = y
     }
 }
