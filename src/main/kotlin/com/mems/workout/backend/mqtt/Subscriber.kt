@@ -39,6 +39,8 @@ class Subscriber(
             val data = mapper.readValue(message.toString(), Data::class.java)
             if (data != null) {
                 println("data: $data")
+                template.convertAndSend("/topic/y", data.getY())
+                template.convertAndSend("/topic/z", data.getZ())
             }
         } catch (error: Exception) {
             println(error)
