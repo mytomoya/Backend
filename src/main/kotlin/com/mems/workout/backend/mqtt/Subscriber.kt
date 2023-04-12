@@ -31,7 +31,7 @@ class Subscriber(
     }
 
     override fun messageArrived(topic: String, message: MqttMessage) {
-        println("received: $message")
+        println("[$topic] received: $message")
         template.convertAndSend("/topic/message", Message(message.toString()))
 
         try {
