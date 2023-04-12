@@ -1,5 +1,7 @@
 package com.mems.workout.backend.mqtt
 
+import com.fasterxml.jackson.databind.ObjectMapper
+import com.mems.workout.backend.model.Data
 import com.mems.workout.backend.model.Message
 import com.mems.workout.backend.model.Value
 import org.eclipse.paho.client.mqttv3.*
@@ -31,6 +33,19 @@ class Subscriber(
     override fun messageArrived(topic: String, message: MqttMessage) {
         println("received: $message")
         template.convertAndSend("/topic/message", Message(message.toString()))
+
+        try {
+            val mapper = ObjectMapper()
+            val data = mapper.readValue(message.toString(), Data::class.java)
+            if (data != null) {
+                println("data: $data")
+                template.convertAndSend("/topic/y", data.getY())
+                template.convertAndSend("/topic/z", data.getZ())
+            }
+        } catch (error: Exception) {
+            println(error)
+        }
+
 
         val value = message.toString().toDoubleOrNull()
         if (value != null) {
