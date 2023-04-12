@@ -4,14 +4,11 @@ import com.fasterxml.jackson.databind.JsonNode
 import com.mems.workout.backend.db.Data
 import com.mems.workout.backend.db.InvalidIdException
 import com.mems.workout.backend.db.UseCase
-import com.mems.workout.backend.model.Message
 import com.mems.workout.backend.mqtt.Subscriber
 import jakarta.annotation.PostConstruct
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.http.HttpStatus
 import org.springframework.http.ResponseEntity
-import org.springframework.messaging.handler.annotation.MessageMapping
-import org.springframework.messaging.handler.annotation.SendTo
 import org.springframework.messaging.simp.SimpMessagingTemplate
 import org.springframework.web.bind.annotation.*
 import java.util.*
@@ -28,9 +25,9 @@ class Controller {
     @Autowired
     private lateinit var useCase: UseCase
 
-    fun createMqttSubscriber(brokerHostName: String, subscribeTopic: String) {
+    fun createMqttSubscriber(brokerHostName: String, subscribeTopics: Array<String>) {
         executor.submit {
-            val subscriber = Subscriber(brokerHostName, subscribeTopic, template)
+            val subscriber = Subscriber(brokerHostName, subscribeTopics, template)
             subscriber.subscribe()
         }
     }
@@ -125,7 +122,7 @@ class Controller {
 
     @PostConstruct
     fun init() {
-        createMqttSubscriber("host.docker.internal", "topic")
+        createMqttSubscriber("host.docker.internal", arrayOf("topic", "topic2"))
 //        createMqttSubscriber("localhost", "topic")
     }
 }
