@@ -14,15 +14,15 @@ import kotlin.system.exitProcess
 
 class Subscriber(
     brokerHostName: String,
-    subscribeTopic: String,
+    subscribeTopics: Array<String>,
     private val template: SimpMessagingTemplate,
 ) : MqttCallback {
     private val broker: String
-    private val topic: String
+    private val topics: Array<String>
 
     init {
         this.broker = "tcp://$brokerHostName:1883"
-        this.topic = subscribeTopic
+        this.topics = subscribeTopics
     }
 
     override fun connectionLost(cause: Throwable) {
@@ -66,7 +66,9 @@ class Subscriber(
         println("Connecting to broker $broker")
         client.connect(connectOptions)
 
-        client.subscribe(topic, qos)
+        for (topic in topics) {
+            client.subscribe(topic, qos)
+        }
 
         val bufferReader = BufferedReader(InputStreamReader(System.`in`))
 
