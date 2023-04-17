@@ -42,7 +42,7 @@ class Subscriber(
             if (data != null) {
                 println("data: $data")
                 template.convertAndSend("/topic/time", data.getTime())
-                template.convertAndSend("/topic/activity", data.getTime())
+                template.convertAndSend("/topic/activity", data.getActivity())
                 template.convertAndSend("/topic/y_acc", data.getYAcceleration())
                 template.convertAndSend("/topic/z_acc", data.getZAcceleration())
                 template.convertAndSend("/topic/y_correct", data.getYCorrect())
