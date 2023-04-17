@@ -41,8 +41,8 @@ class Subscriber(
                 println("data: $data")
                 template.convertAndSend("/topic/time", data.getTime())
                 template.convertAndSend("/topic/activity", data.getTime())
-                template.convertAndSend("/topic/y", data.getY())
-                template.convertAndSend("/topic/z", data.getZ())
+                template.convertAndSend("/topic/y", data.getYAcceleration())
+                template.convertAndSend("/topic/z", data.getZAcceleration())
             }
         } catch (error: Exception) {
             println(error)
