@@ -1,5 +1,6 @@
 package com.mems.workout.backend.mqtt
 
+import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mems.workout.backend.model.Data
 import com.mems.workout.backend.model.Message
@@ -36,6 +37,7 @@ class Subscriber(
 
         try {
             val mapper = ObjectMapper()
+            mapper.enable(DeserializationFeature.FAIL_ON_MISSING_CREATOR_PROPERTIES)
             val data = mapper.readValue(message.toString(), Data::class.java)
             if (data != null) {
                 println("data: $data")
