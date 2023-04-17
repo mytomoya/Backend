@@ -5,9 +5,17 @@ import com.fasterxml.jackson.annotation.JsonProperty
 
 class Data @JsonCreator constructor(
     @JsonProperty("time") private var time: Float,
+    @JsonProperty("activity") private var activity: Boolean,
     @JsonProperty("y") private var y: Float,
     @JsonProperty("z") private var z: Float,
 ) {
+    fun getActivity(): Boolean {
+        return this.activity
+    }
+    fun setActivity(activity: Boolean) {
+        this.activity = activity
+    }
+
     fun getTime(): Float {
         return this.time
     }
