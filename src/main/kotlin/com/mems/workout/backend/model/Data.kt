@@ -11,13 +11,6 @@ class Data @JsonCreator constructor(
     @JsonProperty("y_correct") private var yCorrect: Boolean,
     @JsonProperty("z_correct") private var zCorrect: Boolean,
 ) {
-    fun getActivity(): Boolean {
-        return this.activity
-    }
-    fun setActivity(activity: Boolean) {
-        this.activity = activity
-    }
-
     fun getTime(): Float {
         return this.time
     }
@@ -25,20 +18,25 @@ class Data @JsonCreator constructor(
         this.time = time
     }
 
-    fun getZAcceleration(): Float {
-        return this.zAcceleration
+    fun getActivity(): Boolean {
+        return this.activity
     }
-
-    fun setZAcceleration(z: Float) {
-        this.zAcceleration = z
+    fun setActivity(activity: Boolean) {
+        this.activity = activity
     }
 
     fun getYAcceleration(): Float {
         return this.yAcceleration
     }
-
     fun setYAcceleration(y: Float) {
         this.yAcceleration = y
+    }
+
+    fun getZAcceleration(): Float {
+        return this.zAcceleration
+    }
+    fun setZAcceleration(z: Float) {
+        this.zAcceleration = z
     }
 
     fun getYCorrect(): Boolean {
