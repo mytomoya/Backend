@@ -32,7 +32,7 @@ class UseCase {
     }
 
     private fun validate(data: Data): Boolean {
-        println(data)
+
         val time = data.getDataJson().get("time")
         val activities = data.getDataJson().get("activities")
         val yAcc = data.getDataJson().get("yAcc")
