@@ -32,21 +32,33 @@ class UseCase {
     }
 
     private fun validate(data: Data): Boolean {
+
         val time = data.getDataJson().get("time")
-        val values = data.getDataJson().get("values")
+        val activities = data.getDataJson().get("activities")
+        val yAcc = data.getDataJson().get("yAcc")
+        val zAcc = data.getDataJson().get("zAcc")
+        val yCorrect = data.getDataJson().get("yCorrect")
+        val zCorrect = data.getDataJson().get("zCorrect")
 
-        if (time == null || values == null) {
+        if (time == null
+            || activities == null
+            || yAcc == null
+            || zAcc == null
+            || yCorrect == null
+            || zCorrect == null
+        ) {
             return false
         }
-        if (!time.isArray || !time.isArray) {
+        if (!time.isArray
+            || !activities.isArray
+            || !yAcc.isArray
+            || !zAcc.isArray
+            || !yCorrect.isArray
+            || !zCorrect.isArray
+        ) {
             return false
         }
 
-        val timeArray = time as ArrayNode
-        val valuesArray = values as ArrayNode
-        if (timeArray.size() != valuesArray.size()) {
-            return false
-        }
         return true
     }
 }
