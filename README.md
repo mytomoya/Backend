@@ -92,3 +92,97 @@ docker network create mems-network --subnet=192.168.1.0/24 --gateway=192.168.1.1
   - type: `bool`
 - `/topic/z_correct`
   - type: `bool`
+
+
+## REST API
+
+### Add [`/add`]
+
+Add new data
+- Method: `POST`
+- Body: data captured by sensor
+  ```json
+  {
+    "time": "float",
+    "activity": "bool",
+    "y_acc": "float",
+    "z_acc": "flaot",
+    "y_correct": "bool",
+    "z_correct": "bool"
+  }
+  ```
+- Response: 
+  ```json
+  {
+    "data": {
+      "id": "int",
+      "datetime": "string",
+      "dataJson": {
+          "time": "float",
+          "activity": "bool",
+          "y_acc": "float",
+          "z_acc": "flaot",
+          "y_correct": "bool",
+          "z_correct": "bool"
+      }
+    },
+    "error": "string"
+  }
+  ```
+
+### Get [`/get{?id}`]
+
+Get data of the specified id
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": {
+      "time": "float",
+      "activity": "bool",
+      "y_acc": "float",
+      "z_acc": "flaot",
+      "y_correct": "bool",
+      "z_correct": "bool"
+    },
+    "error": "string"
+  }
+  ```
+
+
+### Delete [`/delete{?id}`]
+
+Delete data of the specified id
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": "int",
+    "error": "string"
+  }
+  ```
+
+### Delete [`/list{?offset}`]
+
+Get a list of data of with the specified offset
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": [
+      {
+        "id": "int",
+        "datetime": "string",
+        "dataJson": {
+          "time": "float",
+          "activity": "bool",
+          "y_acc": "float",
+          "z_acc": "flaot",
+          "y_correct": "bool",
+          "z_correct": "bool"
+        }
+      }
+    ],
+    "error": "string"
+  }
+  ```
