@@ -40,6 +40,21 @@ i=1; while true; do mosquitto_pub -h localhost -t "topic" -m "$RANDOM"; i=$((i+1
 ```
 
 
+### MQTT Topics
+
+- `topic`: data captured by the sensor is sent with this topic.
+  ```json
+  {
+    "time": "float",
+    "activity": "bool",
+    "y_acc": "float",
+    "z_acc": "flaot",
+    "y_correct": "bool",
+    "z_correct": "bool"
+  }
+  ```
+
+
 ## Run the App
 
 Follow [Install Docker Engine](https://docs.docker.com/engine/install/) to install `Docker Desktop`.
