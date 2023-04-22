@@ -40,6 +40,21 @@ i=1; while true; do mosquitto_pub -h localhost -t "topic" -m "$RANDOM"; i=$((i+1
 ```
 
 
+### MQTT Topics
+
+- `topic`: data captured by the sensor is sent with this topic.
+  ```json
+  {
+    "time": "float",
+    "activity": "bool",
+    "y_acc": "float",
+    "z_acc": "flaot",
+    "y_correct": "bool",
+    "z_correct": "bool"
+  }
+  ```
+
+
 ## Run the App
 
 Follow [Install Docker Engine](https://docs.docker.com/engine/install/) to install `Docker Desktop`.
@@ -61,5 +76,113 @@ docker network create mems-network --subnet=192.168.1.0/24 --gateway=192.168.1.1
 
 - WebSocket endpoint: `http://localhost:8080/endpoint`
   - `http://localhost:3000` (e.g., React client) can connect to it.
-- The server listens at `/app/send/message`.
-  - If a message is received, the server responds is sent to the topic `/topic/message`.
+
+
+### WebSocket Topics
+
+- `/topic/time`
+  - type: `float`
+- `/topic/activity`
+  - type: `bool`
+- `/topic/y_acc`
+  - type: `float`
+- `/topic/z_acc`
+  - type: `float`
+- `/topic/y_correct`
+  - type: `bool`
+- `/topic/z_correct`
+  - type: `bool`
+
+
+## REST API
+
+### Add [`/add`]
+
+Add new data
+- Method: `POST`
+- Body: data captured by sensor
+  ```json
+  {
+    "time": "float",
+    "activity": "bool",
+    "y_acc": "float",
+    "z_acc": "flaot",
+    "y_correct": "bool",
+    "z_correct": "bool"
+  }
+  ```
+- Response: 
+  ```json
+  {
+    "data": {
+      "id": "int",
+      "datetime": "string",
+      "dataJson": {
+          "time": "float",
+          "activity": "bool",
+          "y_acc": "float",
+          "z_acc": "flaot",
+          "y_correct": "bool",
+          "z_correct": "bool"
+      }
+    },
+    "error": "string"
+  }
+  ```
+
+### Get [`/get{?id}`]
+
+Get data of the specified id
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": {
+      "time": "float",
+      "activity": "bool",
+      "y_acc": "float",
+      "z_acc": "flaot",
+      "y_correct": "bool",
+      "z_correct": "bool"
+    },
+    "error": "string"
+  }
+  ```
+
+
+### Delete [`/delete{?id}`]
+
+Delete data of the specified id
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": "int",
+    "error": "string"
+  }
+  ```
+
+### Delete [`/list{?offset}`]
+
+Get a list of data of with the specified offset
+- Method: `GET`
+- Response: 
+  ```json
+  {
+    "data": [
+      {
+        "id": "int",
+        "datetime": "string",
+        "dataJson": {
+          "time": "float",
+          "activity": "bool",
+          "y_acc": "float",
+          "z_acc": "flaot",
+          "y_correct": "bool",
+          "z_correct": "bool"
+        }
+      }
+    ],
+    "error": "string"
+  }
+  ```
