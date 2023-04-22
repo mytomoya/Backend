@@ -3,8 +3,6 @@ package com.mems.workout.backend.mqtt
 import com.fasterxml.jackson.databind.DeserializationFeature
 import com.fasterxml.jackson.databind.ObjectMapper
 import com.mems.workout.backend.model.Data
-import com.mems.workout.backend.model.Message
-import com.mems.workout.backend.model.Value
 import org.eclipse.paho.client.mqttv3.*
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence
 import org.springframework.messaging.simp.SimpMessagingTemplate
@@ -33,7 +31,6 @@ class Subscriber(
 
     override fun messageArrived(topic: String, message: MqttMessage) {
         println("[$topic] received: $message")
-        template.convertAndSend("/topic/message", Message(message.toString()))
 
         try {
             val mapper = ObjectMapper()
@@ -50,12 +47,6 @@ class Subscriber(
             }
         } catch (error: Exception) {
             println(error)
-        }
-
-
-        val value = message.toString().toDoubleOrNull()
-        if (value != null) {
-            template.convertAndSend("/topic/value", Value(value))
         }
     }
 

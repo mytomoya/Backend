@@ -1,6 +1,5 @@
 package com.mems.workout.backend.db
 
-import com.fasterxml.jackson.databind.node.ArrayNode
 import org.springframework.beans.factory.annotation.Autowired
 import org.springframework.stereotype.Service
 
