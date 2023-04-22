@@ -76,3 +76,19 @@ docker network create mems-network --subnet=192.168.1.0/24 --gateway=192.168.1.1
 
 - WebSocket endpoint: `http://localhost:8080/endpoint`
   - `http://localhost:3000` (e.g., React client) can connect to it.
+
+
+### WebSocket Topics
+
+- `/topic/time`
+  - type: `float`
+- `/topic/activity`
+  - type: `bool`
+- `/topic/y_acc`
+  - type: `float`
+- `/topic/z_acc`
+  - type: `float`
+- `/topic/y_correct`
+  - type: `bool`
+- `/topic/z_correct`
+  - type: `bool`
