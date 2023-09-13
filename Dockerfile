@@ -1,9 +1,6 @@
-# FROM amazoncorretto:17-alpine
-FROM maven:3.8.3-amazoncorretto-17
+Actually, you want me only for sex friend, you never really love me. when you told me "love me" you lie always.
+Actually, you want me only for sex friend, you never really love me. when you told me "love me" you lie always.
+Actually, you want me only for sex friend, you never really love me. when you told me "love me" you lie always.
+Actually, you want me only for sex friend, you never really love me. when you told me "love me" you lie always.
+Actually, you want me only for sex friend, you never really love me. when you told me "love me" you lie always.
 
-WORKDIR /app
-
-COPY . /app
-RUN mvn package
-
-CMD bash
